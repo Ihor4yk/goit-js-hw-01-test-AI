@@ -1,22 +1,21 @@
 class Storage {
-  #items;
   constructor(items) {
-    this.#items = items;
+    this.items = items;
   }
 
   getItems() {
-    return this.#items;
+    return this.items;
   }
 
   addItem(item) {
-    this.#items.push(item);
+    this.items.push(item);
   }
 
   removeItem(item) {
-    const deleteIndex = this.#items.indexOf(item);
+    const deleteIndex = this.items.indexOf(item);
 
     if (deleteIndex !== -1) {
-      this.#items.splice(deleteIndex, 1);
+      this.items.splice(deleteIndex, 1);
     } else {
       console.log("Такого товару не існує!");
     }
