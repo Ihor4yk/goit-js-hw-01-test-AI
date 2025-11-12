@@ -1,36 +1,39 @@
 class Storage {
-  #items;
   constructor(items) {
-    this.#items = items;
+    this.items = items;
   }
 
   getItems() {
-    return this.#items;
+    return this.items;
   }
 
-  addItem(newItem) {
-    this.#items.push(newItem);
+  addItem(item) {
+    this.items.push(item);
   }
 
-  removeItem(itemToRemove) {
-    const deleteIndex = this.#items.findIndex(item => item.toLowerCase().trim() === itemToRemove.toLowerCase().trim());
+  removeItem(item) {
+    const deleteIndex = this.items.indexOf(item);
 
-    if (deleteIndex === -1) {
-      this.#items.splice(deleteIndex, 1);
+    if (deleteIndex !== -1) {
+      this.items.splice(deleteIndex, 1);
     } else {
-      this.#items;
+      console.log("Такого товару не існує!");
     }
   }
 }
 
-const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
-console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+const storage = new Storage(["🍎", "🍋", "🍇", "🍑"]);
 
-storage.addItem("Droid");
-console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+const items = storage.getItems();
+console.table(items); // [ '🍎', '🍋', '🍇', '🍑' ]
 
-storage.removeItem("Prolonger");
-console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+storage.addItem("🍌");
+console.table(storage.items); // [ '🍎', '🍋', '🍇', '🍑', '🍌' ]
 
-storage.removeItem("Scaner");
-console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+storage.removeItem("🍋");
+console.table(storage.items); // [ '🍎', '🍇', '🍑', '🍌' ]
+
+storage.removeItem("🍋");
+
+storage.removeItem("🍇");
+console.table(storage.items); // [ '🍎', '🍑', '🍌' ]

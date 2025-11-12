@@ -1,8 +1,5 @@
 class StringBuilder {
-  #value;
-  constructor(initialValue) {
-    this.#value = initialValue;
-  }
+  #value = initialValue;
 
   getValue() {
     return this.#value;
@@ -12,11 +9,11 @@ class StringBuilder {
     this.#value += str;
   }
 
-  padStart() {
+  padStart(str) {
     this.#value = str + this.#value;
   }
 
-  padBoth() {
+  padBoth(str) {
     this.#value = str + this.#value + str;
   }
 }
