@@ -1,39 +1,36 @@
 class Storage {
+  #items;
   constructor(items) {
-    this.items = items;
+    this.#items = items;
   }
 
   getItems() {
-    return this.items;
+    return this.#items;
   }
 
-  addItem(item) {
-    this.items.push(item);
+  addItem(newItem) {
+    this.#items.push(newItem);
   }
 
-  removeItem(item) {
-    const deleteIndex = this.items.indexOf(item);
+  removeItem(itemToRemove) {
+    const deleteIndex = this.#items.findIndex(item => item.toLowerCase().trim() === itemToRemove.toLowerCase().trim());
 
     if (deleteIndex !== -1) {
-      this.items.splice(deleteIndex, 1);
+      this.#items.splice(deleteIndex, 1);
     } else {
-      console.log("Такого товару не існує!");
+      this.#items;
     }
   }
 }
 
-const storage = new Storage(["🍎", "🍋", "🍇", "🍑"]);
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
 
-const items = storage.getItems();
-console.table(items); // [ '🍎', '🍋', '🍇', '🍑' ]
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
 
-storage.addItem("🍌");
-console.table(storage.items); // [ '🍎', '🍋', '🍇', '🍑', '🍌' ]
+storage.removeItem("       ProlOngeR ");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
 
-storage.removeItem("🍋");
-console.table(storage.items); // [ '🍎', '🍇', '🍑', '🍌' ]
-
-storage.removeItem("🍋");
-
-storage.removeItem("🍇");
-console.table(storage.items); // [ '🍎', '🍑', '🍌' ]
+storage.removeItem("Scaner");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
